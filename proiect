@@ -1,0 +1,33 @@
+using System;
+using System.IO;
+
+namespace SizeOfFileOrFolder
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Dimensiune Fisier: {0} bytes ", DimensiuneFolder(@"/Users/admin/Desktop/facultaate/geometrie"));
+        }
+
+        static int DimensiuneFolder(string path)
+        {
+            
+            DirectoryInfo directoryInfo = new DirectoryInfo(path);
+            FileSystemInfo[] v = directoryInfo.GetFileSystemInfos();
+
+            
+            int dimensiune = 0;
+            for (int i = 0; i < v.Length; i++)
+            {
+                FileInfo fileInfo = v[i] as FileInfo;
+                if (fileInfo != null)
+                {
+                    dimensiune += (int)fileInfo.Length;
+                }
+            }
+            return dimensiune;
+        }
+
+    }
+}
